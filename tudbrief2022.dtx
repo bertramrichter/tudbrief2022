@@ -1,0 +1,760 @@
+% \iffalse meta-comment
+%<*internal>
+\def\fileauthor{Bertram Richter}
+\def\fileversion{v0.3}
+\def\filedate{\today}
+\iffalse
+%</internal>
+%<*readme>
+Dies ist eine LaTeX-Klasse für eine DIN 5008-konforme Briefvorlage nach dem Corporate Design der TU Dresden.
+Benötigt wird eine seit 2020 veröffentlichte LaTeX-Distribution.
+
+---
+
+This is a LaTeX class for a letter template, which conforms to DIN 5008, for members of the Technische Universität Dresden.
+A LaTeX-distribution with release date 2020 or later is required.
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+-------:| -----------------------------------------------------------------
+tudbrief2022:| DIN 5008-conformant letter class for members of the Technische Universität Dresden
+ Author:| \fileauthor
+License:| Released under the LaTeX Project Public License v1.3c or later
+    See:| http://www.latex-project.org/lppl.txt
+
+\endpreamble
+\postamble
+
+Copyright © 2022 by \fileauthor
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+\fileauthor.
+
+This work consists of the file tudbrief2022.dtx and a Makefile.
+Running "make" generates the derived files README, tudbrief2022.pdf and tudbrief2022.cls.
+Running "make inst" installs the files in the user's TeX tree.
+Running "make install" installs the files in the local TeX tree.
+
+\endpostamble
+
+\usedir{tex/latex/tudbrief2022}
+\generate{
+  \file{\jobname.cls}{\from{\jobname.dtx}{class}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/tudbrief2022}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/tudbrief2022}
+\generate{
+  \file{README.md}{\from{\jobname.dtx}{readme}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+% \fi
+% \iffalse
+%<*driver>
+\ProvidesFile{\jobname.dtx}
+\documentclass{ltxdoc}
+\usepackage[a4paper,margin=25mm,left=50mm,nohead]{geometry}
+\usepackage[numbered]{hypdoc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{siunitx}
+	\sisetup{locale=DE}
+\usepackage{verbatim}
+\usepackage{pdfpages}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{.5\baselineskip plus 0.2ex minus 0.2ex}%
+\begin{document}
+    \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% 
+% \DoNotIndex{\newcommand,\newenvironment}
+% \title{\textsf{\jobname} -- \LaTeX{} Briefvorlage im Corporate Design der Technischen Universität Dresden
+%     \thanks{Dokumentation für \textsf{\jobname}~\fileversion, Versionsdatum: \filedate.}}
+% \author{\fileauthor}
+% \date{\filedate}
+%
+% \maketitle
+%
+% \begin{abstract}
+%     \noindent
+%     Dieses Dokument beschreibt \textsf{\jobname}.
+%     Mit \textsf{\jobname} können DIN~5008-konforme Briefe relativ unkompliziert verfasst und gesetzt werden.
+%     Gedacht ist sie zur Nutzung als Briefvorlage im Corporate Design der Technischen Universität Dresden.
+% \end{abstract}
+%
+% \section{Klassenoptionen}
+% Die Klasse \textsf{\jobname} basiert auf \verb|article| und besitzt die folgenden Klassen-Optionen.
+% Grundsätzlich werden (fast) alle in \verb|article| verfügbaren Optionen unterstützt.
+% Jedoch ist das Papierformat auf A4 im Hochformat beschränkt.
+%
+% \DescribeMacro{oneside/twoside} Legt fest, ob die Brief einseitig oder zweiseitig gesetzt werden soll. Diese Option wird direkt and die Elternklasse \verb|article| weitergeben.
+%
+% \DescribeMacro{foldmark/nofoldmark} Aktiviert/deaktiviert die Faltmarken. Standardmäßig sind die Faltmarken aktiviert. Die Faltmarken erscheinen auf jeder ungeraden Seite (Vorderseite).
+%
+% \DescribeMacro{punchmark/nopunchmark} Aktiviert/deaktiviert die Lochmarke. Standardmäßig ist die Lochmarke aktiviert. Die Lochmarke erscheint auf jeder ungeraden Seite (Vorderseite).
+%
+% \section{Verfügbare Befehle}
+% \subsection{Adressfeld}
+% Das Adressfeld wird mit den folgenden Einträgen gefüllt.
+% Durch einen Strich getrennt erscheinen Name und Anschrift des Absenders in einer Zeile über dem eigentlichen Adressfeld.
+% Die Reihenfolge der Einträge im Brief entspricht der Reihenfolge der nachfolgend aufgeführten Befehle.
+% Nicht belegte (leer gelassene) Einträge werden ausgelassen, ohne Leerzeile zu erzeugen.
+%
+% \DescribeMacro{\ZVZiii}\marg{text} Legt eventuelle elektronische Freimachungsvermerke fest.
+%
+% \DescribeMacro{\ZVZii}\marg{text} Legt eine eventuelle Vorausfügung fest.
+%
+% \DescribeMacro{\ZVZi}\marg{text} Legt z.\,B.\ \enquote{Einschreiben} fest.
+%
+% \DescribeMacro{\AZFirma}\marg{text} Legt den Firmennamen des Empfänger fest.
+%
+% \DescribeMacro{\AZAnrede}\marg{text} Legt die Anrede des Empfänger fest z.\,B.\ \enquote{Herr}.
+%
+% \DescribeMacro{\AZName}\marg{text} Legt eventuelle akademische Grade und den Namen des Empfänger fest.
+%
+% \DescribeMacro{\AZStrasse}\marg{text} Legt Straße und Hausnummer des Empfänger fest.
+%
+% \DescribeMacro{\AZPLZOrt}\marg{text} Legt die Postleitzahl und den Ort des Empfänger fest.
+%
+% \DescribeMacro{\AZLand}\marg{text} Legt das Land des Empfänger fest.
+%
+% \subsection{Absenderfeld}
+% Das Absenderfeld erscheint rechts neben dem Adressfeld.
+% Die Reihenfolge der Einträge im Brief entspricht der Reihenfolge der nachfolgend aufgeführten Befehle.
+% Nicht belegte (leer gelassene) Einträge werden ausgelassen und erzeugen keine Leerzeile.
+%
+% \DescribeMacro{\logoeinrichtung}\marg{Dateiname} Legt die Datei fest, welche als Logo des Instituts/Einrichtung im Abserderfeld verwendet werden soll.
+%
+% \DescribeMacro{\ABSName}\marg{text} Legt den Namen des Absenders fest.
+% Dieser Eintrag erscheint an mehreren Stellen im Dokument: im Absenderfeld sowie und der Schlussfloskel unter der Unterschrift.
+% Zusätzlich wird er als Autor den Metadaten der erzeugten PDF hinzugefügt.
+%
+% \DescribeMacro{\ABSFunktion}\marg{text} Legt die Funktion/Anstellung des Absenders fest.
+%
+% \DescribeMacro{\ABSPhone}\marg{text} Legt die Festnetznummer des Absenders fest.
+%
+% \DescribeMacro{\ABSMobile}\marg{text} Legt die Mobiltelefonnummer des Absenders fest.
+%
+% \DescribeMacro{\ABSFax}\marg{text} Legt die Faxnummer des Absenders fest.
+%
+% \DescribeMacro{\ABSWeb}\marg{text} Legt den Web-Auftritt (Homepage) des Absenders fest.
+%
+% \DescribeMacro{\ABSMail}\marg{text} Legt die E-Mail-Adresse des Absenders fest.
+%
+% \DescribeMacro{\ABSInfo}\marg{text} Legt eventuell benötigte zusätzliche Informationen über den Absender fest.
+% Sofern diese aus mehreren Zeilen mit manuellen Umbrüchen bestehen, sind Zeilen mit \verb|\par| umzubrechen. Leerzeilen entsprechend mit \verb|~\par| einfügen.
+%
+% \subsection{Fußfeld der ersten Seite}
+% \DescribeMacro{\ABSStrasse}\marg{text} Legt Straße und Hausnummer des Absenders fest.
+% Dieser Eintrag erscheint im Feld für die Besucheradresse im Fußfeld der ersten Seite.
+%
+% \DescribeMacro{\ABSPLZ}\marg{text} Legt die Postleitzahl des Absenders fest.
+% Dieser Eintrag erscheint im Feld für die Besucheradresse im Fußfeld der ersten Seite.
+%
+% \DescribeMacro{\ABSOrt}\marg{text} Legt den Ort des Absenders fest.
+% Dieser Eintrag erscheint im Feld für die Besucheradresse im Fußfeld der ersten Seite.
+%
+% \DescribeMacro{\ABSRaum}\marg{text} Legt das Büro des Absenders fest.
+% Dieser Eintrag erscheint im Feld für die Besucheradresse im Fußfeld der ersten Seite.
+%
+% \DescribeMacro{\BriefAdresse}\marg{text} Legt das eine abweichende Adressierung für Antwortbriefe fest.
+% Dieser Eintrag erscheint im Feld für die Briefadresse im Fußfeld der ersten Seite.
+% Zeilenumbrüche sind mit \verb|\par| zu realisieren.
+%
+% \DescribeMacro{\PaketAdresse}\marg{text} Legt das eine abweichende Adressierung für Paketsendungen fest.
+% Dieser Eintrag erscheint im Feld für die Paketadresse im Fußfeld der ersten Seite.
+% Zeilenumbrüche sind mit \verb|\par| zu realisieren.
+%
+% \DescribeMacro{\rollstuhlinformationen}\marg{text} Legt das eine Hinweise für die barrierefreie Erreichbarkeit fest.
+% Dieser Eintrag erscheint im Feld für den barrierefreien Zugang im Fußfeld der ersten Seite.
+% Zeilenumbrüche sind mit \verb|\par| zu realisieren.
+%
+% \subsection{Bezugszeichenzeile und Betreff}
+% \DescribeMacro{\Bezugszeichenzeile}\marg{text} Legt den Text der Bezugszeichenzeile fest.
+% Für die Bezugszeichenzeile ist unterhalb des Adressfelds und des Absenderfelds \SI{8.46}{\milli\meter} Platz reseviert.
+%
+% \DescribeMacro{\Betreff}\marg{text} Legt den Text der Betreffzeile fest, welche unter der Bezugszeichenzeile eingefügt wird.
+%
+% \subsection{Erscheinungsbild des Briefs}
+% Hier sind Befehle beschrieben, welche das allgemeine Aussehen des Briefs beeinflussen.
+%
+% \DescribeMacro{\Briefpapier}\marg{Dateiname} Legt die Datei fest, welche als Briefpapier (Hintergrund für alle Seiten) verwendet werden soll.
+% Möglich ist eine Bilddatei (PNG, JPG) oder eine PDF.
+% Sofern eine PDF genutzt wird, wird jedoch nur die erste Seite verwendet.
+%
+% \DescribeMacro{\Signatur}\marg{Dateiname} Legt die Datei fest, welche als Unterschrift verwendet werden soll.
+% Möglich ist eine Bilddatei (PNG, JPG) oder eine PDF.
+% Sofern eine PDF genutzt wird, wird jedoch nur die erste Seite verwendet.
+% Sofern keine Datei spezifiziert ist, wird entsprechend Platz für eine händische Unterschrift gelassen.
+%
+% \subsubsection{Einstellbare Längen}
+% Die nachfolgend beschriebenen Längen (Standardwert in Klammern) können mit \verb|\setlength{<lengthname>}{<Länge>}| in der Präambel abgeändert werden:
+%
+% \DescribeMacro{\tmargin} (\SI{20}{\milli\meter}) Oberer Rand. Wert muss \(\leq \SI{45}{mm}\) sein, anderenfalls verrutscht das Anschriftfeld.
+%
+% \DescribeMacro{\bmargin} (\SI{20}{\milli\meter}) Unterer Rand. Enthält nicht die Fußzeile!
+%
+% \DescribeMacro{\lmargin} (\SI{30}{\milli\meter}) Linker~-- in doppelseitigem Satz innnerer~-- Rand.
+%
+% \DescribeMacro{\bmargin} (\SI{20}{\milli\meter}) Rechter~-- in doppelseitigem Satz äußerer~-- Rand.
+%
+% Der Textkörper ist mit den folgenden Werten gesetzt:
+%
+% \DescribeMacro{\parindent} (\SI{0}{\milli\meter}) Einzu der ersten Zeile eines Absatzes.
+%
+% \DescribeMacro{\parskip} (\(\SI{1}{baselineskip} \pm \SI{0.2}{ex}\)) Abstand zwischen zwei Absätzen. Dies entspricht einer Leerzeile mit einer Flexibilität von \(\frac{1}{5}\) der Höhe des Buchstaben \enquote{x}.
+%
+% \subsection{Briefkörper}
+% Bisher wurde alles in der Präambel festgelegt. In diesem Abschnitt sind die Befehle beschrieben, welche innerhalb der \verb|document|-Umgebung verfügbar sind.
+%
+% \DescribeMacro{\maketitle} Setzt die erste Seite.
+% Dies ist das erste Befehl, welcher innerhalb der \verb|document|-Umgebung aufgerufen werden sollte.
+% Es wird der Briefkopf, Adressfeld, Absenderfeld, Bezugszeichen- und Betreffzeile gesetzt.
+% 
+% Durch mehrmalige Nutzung von \verb|\maketitle| ist es möglich, auch mehrere Briefe (Serienbrief) in einem einzigen Dokument zu setzen.
+% Ein neuer Brief wird immer auf einer rechten Seite begonnen.
+% Bei Option \verb|oneside| ist dies eine neue Seite, mit Option \verb|twoside| auf einer ungeraden Seite) begonnen, wenn nötig, wirde eine Leerseite eingefügt.
+% Damit sind auch mehrere zweiseitige Briefe problemlos am Stück duplex-druckbar.
+% Die sich ändernden Daten müssen entsprechend vor dem erneuten Aufruf eingestellt werden und der Breifkörper erneut erstellt werden.
+%
+% \DescribeMacro{\Anrede} \marg{Floskel} Eröffnet den Brief mit der Anrede. Am Ende wird automatisch ein Komma angehängt.
+%
+% \DescribeMacro{\Gruss} \oarg{width}\marg{Grußfloskel} Beendet den Brief mit der Grußfloskel, Unterschrift und dem Namen des Absenders.
+% Das optionale Argument \oarg{width} gibt die Breite (Standard \SI{3.5}{\centi\meter}) der Unterschrift und des Unterschriftsstrich an.
+%
+% \subsection{Beispiel}
+% Nachfolgend ist die Quelldatei und Ergebnis eines Beispielbriefs aufgeführt.
+% \verbatiminput{Brief}
+% \includepdf{Brief}
+%
+%\StopEventually{^^A
+%  \PrintChanges
+%  \PrintIndex
+%}
+%
+% \section{Implementation}
+% Nachfolgend ist der kommentierte Quellcode gezeigt.
+% Als normaler Endnutzer kann hier aufgehört werden, zu lesen.
+%
+% \subsection{Klassenbeginn und Optionen und benötigte Pakete}
+%    \begin{macrocode}
+%<*class>
+\def\fileauthor{Bertram Richter}
+\def\fileversion{v0.3}
+\def\filedate{2022/03/18}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{tudbrief2022}[\filedate\space\fileversion\space Briefvorlage by \fileauthor]
+%    \end{macrocode}
+% Ignorierte Optionen
+%    \begin{macrocode}
+\DeclareOption{twocolumn}{%
+    \OptionNotUsed\ClassWarning{tudbrief2022}%
+    {Option "twocolumn" is not supported, will be ignored.}%
+    {}%
+}
+\DeclareOption{landscape}{%
+    \OptionNotUsed\ClassWarning{tudbrief2022}%
+    {Option "landscape" is not supported, will be ignored.}%
+    {}%
+}
+%    \end{macrocode}
+% Optionen, für Faltmarken, Lochmarke und Schriftart.
+% Standardmäßig sind alle aktiviert.
+%    \begin{macrocode}
+\newif\if@foldmark
+\DeclareOption{foldmark}{\@foldmarktrue}
+\DeclareOption{nofoldmark}{\@foldmarkfalse}
+\newif\if@punchmark
+\DeclareOption{punchmark}{\@punchmarktrue}
+\DeclareOption{nopunchmark}{\@punchmarkfalse}
+%    \end{macrocode}
+% Default Einstellungen anwenden, und Optionen and die Elternklasse weitergeben.
+%    \begin{macrocode}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ExecuteOptions{punchmark,foldmark}
+\ProcessOptions\relax
+\LoadClass{article}
+%    \end{macrocode}
+% Zeichenkodierung, mit OpenType (ermöglicht nette Ligarturen), verwende die Schriftart \verb|pifont| für Symbole.
+%    \begin{macrocode}
+\RequirePackage{pifont}
+%    \end{macrocode}
+% Einstellungen für Papier und Ränder
+%    \begin{macrocode}
+\RequirePackage[a4paper, portrait, nohead, includefoot]{geometry}
+%    \end{macrocode}
+% Einfügen von PDFs nach dem Brief
+%    \begin{macrocode}
+\RequirePackage{pdfpages}
+%    \end{macrocode}
+% Paket für Mikro-Typographie für noch gleichmäßigeres Schriftbild
+%    \begin{macrocode}
+\RequirePackage{microtype}
+%    \end{macrocode}
+% Einbindung andere Pakete des Corporate Designs
+%    \begin{macrocode}
+\usepackage[default,scale=0.95]{opensans}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{tudscrcolor}
+%    \end{macrocode}
+% Paket für Verlinkungen, ohne rote Boxes um Links, Links umbrechen, wenn nötig und PDF-Metadaten setzen.
+%    \begin{macrocode}
+\RequirePackage[%
+        hidelinks,%
+        breaklinks=true,%
+        pdfusetitle,%
+        ]{hyperref}
+%    \end{macrocode}
+% \subsection{Speichervariablen}
+% Speichervariablen, diese enthalten auch die Standardwerte.
+% Zuerst kommen Speichervariablen für das Adressfeld, für das Absenderfeld, für die Bezugszeichenzeile und zuletzt für den Brief.
+%    \begin{macrocode}
+\newcommand*{\@ZVZiii}{}
+\newcommand*{\@ZVZii}{}
+\newcommand*{\@ZVZi}{}
+\newcommand*{\@AZFirma}{}
+\newcommand*{\@AZAnrede}{}
+\newcommand*{\@AZName}{}
+\newcommand*{\@AZStrasse}{}
+\newcommand*{\@AZPLZOrt}{}
+\newcommand*{\@AZLand}{}
+\newcommand*{\@ABSName}{}
+\newcommand*{\@ABSStrasse}{}
+\newcommand*{\@ABSPLZ}{}
+\newcommand*{\@ABSOrt}{}
+\newcommand*{\@ABSPhone}{}
+\newcommand*{\@ABSFax}{}
+\newcommand*{\@ABSMobile}{}
+\newcommand*{\@ABSMail}{}
+\newcommand*{\@ABSWeb}{}
+\newcommand*{\@ABSInfo}{}
+\newcommand*{\@Bezugszeichenzeile}{}
+\newcommand*{\@Betreff}{}
+\newcommand*{\@Briefkopf}{}
+\newcommand*{\@Briefpapier}{}
+\newcommand*{\@Signatur}{}
+\newcommand*{\@institut}{}
+\newcommand*{\@logoeinrichtung}{}
+\newcommand*{\@logoDDC}{./template/Logo_DDC.pdf}
+\newcommand*{\@logoTU}{./template/Logo_TU.pdf}
+\newcommand*{\@ABSFunktion}{}
+\newcommand{\@rollstuhlanmerkungen}{}
+\newcommand{\@BriefAdresse}{TU Dresden\par 01062 Dresden}
+\newcommand{\@ABSRaum}{}
+\newcommand{\@PaketAdresse}{TU Dresden,\par Helmholtzstraße 10,\par 01062 Dresden}
+%    \end{macrocode}
+% \subsection{Abmessungen und Erscheinungsbild}
+% Spezielle Abmessungen, diese sind für ein einfacheres Seitenlayout gedacht.
+%    \begin{macrocode}
+\newlength{\tmargin}%
+\newlength{\bmargin}%
+\newlength{\lmargin}%
+\newlength{\rmargin}%
+\newlength{\anschriftpos}%
+\setlength{\tmargin}{30mm}%
+\setlength{\bmargin}{20mm}%
+\setlength{\lmargin}{30mm}%
+\setlength{\rmargin}{20mm}%
+\setlength{\footskip}{10mm}%
+%    \end{macrocode}
+% Am Begin des Dokuments werden die Abmessungseinstellungen angewendet und in \LaTeX{}-interne Befehle geschrieben.
+%    \begin{macrocode}
+\AtBeginDocument{
+    \setlength{\anschriftpos}{45mm}%
+    \addtolength{\anschriftpos}{-\tmargin}%
+    \newgeometry{%
+        lmargin=\lmargin,%
+        rmargin=\rmargin,%
+        tmargin=\tmargin,%
+        bmargin=\bmargin,%
+    }%
+}
+%    \end{macrocode}
+% Absatzseinstellungen für Briefe laut DIN~5008: Kein Einzug, eine Leerzeile.
+%    \begin{macrocode}
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{1\baselineskip plus 0.2ex minus 0.2ex}%
+%    \end{macrocode}
+% Faltmarken
+%    \begin{macrocode}
+\newcommand{\@faltmarken}{{%
+        \def\unitlength{}%
+        \begin{picture}(0mm,0mm)(-5mm,-\tmargin)%
+        \put(-\lmargin,-105mm){\line(1,0){4mm}}%
+        \put(-\lmargin,-210mm){\line(1,0){4mm}}%
+        \end{picture}%
+}}
+%    \end{macrocode}
+% Lochmarke
+%    \begin{macrocode}
+\newcommand{\@lochmarke}{{%
+        \def\unitlength{}%
+        \begin{picture}(0mm,0mm)(-5mm,-\tmargin)%
+        \put(-\lmargin,-.5\paperheight){\line(1,0){4mm}}%
+        \end{picture}%
+}}
+\newcommand{\PrintLogoTU}{{%
+        \def\unitlength{}%
+        \begin{picture}(0mm,0mm)(0mm,0mm)%
+        \put(-\lmargin+11.1mm,-\tmargin+30.1mm){\PrintGraphic{width=57.3mm}{\@logoTU}}%
+        \end{picture}%
+}}
+%    \end{macrocode}
+% Page style für die alle Seiten:
+%    \begin{macrocode}
+\newcommand{\ps@brief}{%
+    \renewcommand{\@oddhead}{\if@foldmark\@faltmarken\fi\if@punchmark\@lochmarke\fi}
+    \renewcommand{\@evenhead}{\@empty}
+    \renewcommand*{\@oddfoot}{{\color{cdgrey}\scriptsize\hfill{}Seite\:\thepage{}}}%
+    \renewcommand*{\@evenfoot}{{\color{cdgrey}\scriptsize Seite\:\thepage\hfill{}}}%
+}
+%    \end{macrocode}
+% Page style für die erste Seite:
+%    \begin{macrocode}
+\newcommand{\ps@briefersteseite}{%
+    \renewcommand{\@oddhead}{\PrintLogoTU\if@foldmark\@faltmarken\fi\if@punchmark\@lochmarke\fi}
+    \renewcommand{\@evenhead}{\@empty}
+    \renewcommand*{\@oddfoot}{\FooterTable}%
+    \renewcommand*{\@evenfoot}{\@empty}%
+}
+%    \end{macrocode}
+% \subsection{Interne Befehle}
+% \DescribeMacro{\test}
+% Testfunktion, soll kurz sein und im Text auffallen.
+%    \begin{macrocode}
+\newcommand{\test}{\textcolor{red}{\textbf{Test}}}
+%    \end{macrocode}
+% \DescribeMacro{\foreverunspace}
+% Entfernt rekursiv Whitespaces von vorn und hinten.
+%    \begin{macrocode}
+\def\foreverunspace{%
+    \ifnum\lastnodetype=11%
+        \unskip\foreverunspace%
+    \else%
+        \ifnum\lastnodetype=12%
+            \unkern\foreverunspace%
+        \else%
+            \ifnum\lastnodetype=13%
+                \unpenalty\foreverunspace%
+            \fi%
+        \fi%
+    \fi%
+}
+%    \end{macrocode}
+% \DescribeMacro{\PrintIfDefined}
+% Wenn \verb|a| definiert ist und non-whitespace Elemente enthält, wird \verb|b| gedruckt, ansonsten (leer) \verb|c|.
+%    \begin{macrocode}
+\newcommand{\PrintIfDefined}[3]{%
+    \def\@testgegenstand{#1}%
+    \def\@jaoption{#2}%
+    \def\@neinoption{#3}%
+    \setbox0=\hbox{\foreverunspace\@testgegenstand\foreverunspace}%
+    \ifdim\wd0=0pt\@neinoption\else\@jaoption\fi%
+}%
+%    \end{macrocode}
+% \DescribeMacro{\PrintOptionalField}
+% Wenn \verb|a| definiert ist und non-whitespace Elemente enthält, wird \verb|a| gedruckt und ein neuer Absatz begonnen. Ansonsten passiert nichts.
+%    \begin{macrocode}
+\newcommand{\PrintOptionalField}[1]{%
+    \PrintIfDefined{#1}{#1\par}{}%
+}%
+%    \end{macrocode}
+% \DescribeMacro{\PrintGraphic}\marg{size}\marg{filename}
+% Dieses Macro untersucht, die \marg{filename} eine existierende Datei ist. Sofern erfolgreich, wird diese mit \verb|\includegraphics[size]{filename}| geladen. Anderenfalls wird ein Fehler ausgegeben.
+%    \begin{macrocode}
+\newcommand{\PrintGraphic}[2]{{%
+		\def\@brempty{}%
+		\ifx#2\@brempty%
+		\else%
+		\IfFileExists{#2}{%
+			\includegraphics[#1]{#2}%
+		}{\ClassError{\jobname}{%
+				File "#2" was not found. %
+				Did you specify the correct filename in \string#2?}{}%
+		}%
+		\fi
+}}%
+%    \end{macrocode}
+%\DescribeMacro{\PrintKopfbereich}
+% Dieser Befehlt setzt den Briefkopf.
+%    \begin{macrocode}
+\newcommand{\PrintKopfbereich}{%
+    \begin{minipage}[t][\anschriftpos][t]{\textwidth}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{1\baselineskip}
+        ~\par
+        \textcolor{cdgrey}{\textbf{\@institut}}
+    \end{minipage}
+}
+%    \end{macrocode}
+% \DescribeMacro{\PrintSignatur}
+% Signatur ausgeben oder Platz für manuelle Unterschrift lassen.
+%    \begin{macrocode}
+\newcommand{\PrintSignatur}[1][3.5cm]{{%
+        \def\@brempty{}%
+        \ifx\@Signatur\@brempty%
+        \par
+        \else%
+        \IfFileExists{\@Signatur}{%
+            \begin{minipage}{#1}%
+                \centering%
+                \includegraphics[width=#1]{\@Signatur}%
+            \end{minipage}\\[-8pt]%
+        }{\ClassError{\jobname}{%
+                File "\@Signatur" was not found. %
+                Did you specify the correct filename in \string\Singatur{}?}{}%
+        }%
+        \fi
+        \rule{#1}{0.5pt}\\
+        \@ABSName
+}}
+%    \end{macrocode}
+% Symbole für die Kontaktdaten des Absenders.
+%    \begin{macrocode}
+\newcommand{\phonesymbol}{\ding{37}}
+\newcommand{\mobilesymbol}{\ding{38}}
+\newcommand{\mailsymbol}{\ding{41}}
+%    \end{macrocode}
+% \DescribeMacro{\PrintBriefPapier}
+% Das in \verb|\@Briefpapier| als Hintergrund für alle Seiten verwenden. Dies kann eine Bilddatei oder eine PDF sein.
+% Sofern eine PDF genutzt wird, wird jedoch nur die erste Seite verwendet.
+%    \begin{macrocode}
+\newcommand{\PrintBriefPapier}{%
+    \def\@brempty{}% temporary empty string
+    \ifx\@Briefpapier\@brempty% check if empty
+    % do nothing, -> no background
+    \else%
+    % Print background to every page
+    \IfFileExists{\@Briefpapier}{%
+        \AddToHook{shipout/background}{%
+            \put (0in,-\paperheight){%
+                \includegraphics[width=\paperwidth,height=\paperheight]{\@Briefpapier}
+            }
+        }%
+    }{\ClassError{\jobname}{%
+            File "\@Briefpapier" was not found. %
+            Did you specify the correct filename in \string\Briefpapier{}?}{}
+        }%
+    \fi%
+}
+%    \end{macrocode}
+% \DescribeMacro{\PrintAnschriftzone}
+% Adressfeld, bestehend aus der \SI{12.7}{\milli\meter} hohen Zusatz- und Vermerkzone und der \SI{27.3}{\milli\meter} hohen Anschriftzone.
+%    \begin{macrocode}
+\newcommand{\PrintAnschriftzone}{%
+    \begin{minipage}[b][45mm][c]{80mm}%
+        \setlength{\parindent}{0pt}%
+        \setlength{\parskip}{0pt}%
+        \begin{scriptsize}%
+            \textcolor{cdgrey}{Technische Universität Dresden, 01062 Dresden}
+        \end{scriptsize}%
+        \\[1\baselineskip]%
+        \PrintOptionalField{\@ZVZiii{}}%
+        \PrintOptionalField{\@ZVZii{}}%
+        \PrintOptionalField{\@ZVZi{}}%
+        \PrintOptionalField{\@AZFirma{}}%
+        \PrintOptionalField{\@AZAnrede{}}%
+        \PrintOptionalField{\@AZName{}}%
+        \PrintOptionalField{\@AZStrasse{}}%
+        \PrintOptionalField{\@AZPLZOrt{}}%
+        \PrintOptionalField{\@AZLand{}}%
+    \end{minipage}%
+}
+%    \end{macrocode}
+% \DescribeMacro{\PrintAbsenderzone}
+% Feld für Absenderinfos
+%    \begin{macrocode}
+\newcommand{\PrintAbsenderzone}{%
+    \begin{minipage}[b][45mm][c]{75mm}%
+        \color{cdgrey}\scriptsize
+        \setlength{\parindent}{0pt}%
+        \setlength{\parskip}{0pt}%
+        \begin{flushright}%
+            \begin{tabular}{@{}ll@{}}%
+            \multicolumn{2}{@{}l@{}}{\PrintGraphic{scale=1}{\@logoeinrichtung}} \\
+            &\\
+            \PrintIfDefined{\@ABSName{}}{Bearbeiter: &\@ABSName{}\\}{}%
+            \PrintIfDefined{\@ABSFunktion{}}{ &\@ABSFunktion{}\\&\\}{}%
+            \PrintIfDefined{\@ABSPhone{}}{Telefon: &\@ABSPhone{}\\}{}%
+            \PrintIfDefined{\@ABSFax{}}{Telefax: &\@ABSFax{}\\}{}%
+            \PrintIfDefined{\@ABSMail{}}{E-Mail: &\href{mailto:\@ABSMail}{\@ABSMail}\\}{}%
+            \PrintIfDefined{\@ABSWeb{}}{Web: &\href{\@ABSWeb}{\@ABSWeb}\\}{}%
+            &\\%
+            Datum: &\@date \\%
+            \end{tabular}\par%
+            \PrintOptionalField{\@ABSInfo}
+        \end{flushright}
+    \end{minipage}
+}
+%    \end{macrocode}
+% \DescribeMacro{\PrintBezugszeichenzeile}
+% Bezugszeichenzeile, ist nicht planmäßig genutzt, wird aber optional behalten.
+%    \begin{macrocode}
+\newcommand{\PrintBezugszeichenzeile}{%
+\begin{minipage}[t][8.46mm][b]{\textwidth}%
+	\mbox{}\@Bezugszeichenzeile{}
+\end{minipage}
+}
+%    \end{macrocode}
+% \DescribeMacro{\FooterTable}
+% Tabelle für die Fußzeile der ersten Seite.
+%    \begin{macrocode}
+    \newcommand{\FooterTable}{%
+        \begin{minipage}[t][5cm][t]{\textwidth}%
+        \scriptsize\color{cdgrey}
+        \setlength{\parindent}{0pt}%
+        \setlength{\parskip}{0pt}%
+        \vspace{-3.5cm}
+        \hfill{}Seite\:\thepage\\[1\baselineskip]
+        \begin{tabular}{@{}%
+                p{3.4cm}@{}%
+                p{3.2cm}@{\hspace{.3cm}}%
+                p{2.8cm}@{}%
+                p{3.7cm}@{}%
+                p{\textwidth-3.4cm-3.5cm-2.8cm-3.7cm}@{}%
+            }%
+            \textbf{Briefadresse}\par \@BriefAdresse{} &%
+            \textbf{Besuchsadresse}\par \PrintOptionalField{\@ABSStrasse}\PrintOptionalField{\@ABSPLZ{} \@ABSOrt}\PrintOptionalField{\@ABSRaum} &%
+            \textbf{Steuernummer}\par (Inland)\par 203/149/02549&%
+            \textbf{Bankverbindung}\par Commerzbank AG,\par Filiale Dresden &%
+            Die TU Dresden ist\par%
+            Partnerin im Netzwerk\par%
+            DRESDEN-concept \\%
+            \textbf{Paketadresse}\par \@PaketAdresse{} &%
+            \textbf{barrierefreier Zugang}\par \@rollstuhlanmerkungen &%
+            \textbf{Umsatzsteuer-Id-Nr.} \par (Ausland)\par DE\,188\,369\,991 &%
+            \textbf{IBAN}\par DE52\,8504\,0000\,0800\,4004\,00\par \textbf{BIC}\par COBADEFF850 &%
+            \begin{minipage}[b][0mm][t]{\textwidth-3.4cm-3.5cm-2.8cm-3.7cm}\PrintGraphic{width=\textwidth}{\@logoDDC}\end{minipage}\\%
+            %
+        \end{tabular}\\%
+        \begin{tabular}{@{}%
+                p{3.4cm}@{}%
+                p{\textwidth-3.4cm}@{}%
+            }%
+            \textbf{Internet} \href{https://www.tu-dresden.de}{www.tu-dresden.de} &%
+            \textbf{Kein Zugang für elektronisch signierte sowie verschlüsselte elektronische Dokumente.}%
+        \end{tabular}%
+        \end{minipage}%
+}%
+%    \end{macrocode}
+% \subsection{Nutzerbefehle}
+% \subsubsection{Speicherbefehle}
+% Die folgenden Befehle belegen die zugehörigen Speichervariablen und sind für den Anwender gedacht.
+%    \begin{macrocode}
+\newcommand*{\ZViii}[1]{\renewcommand*{\@ZVZiii}{#1}}
+\newcommand*{\ZVii}[1]{\renewcommand*{\@ZVZii}{#1}}
+\newcommand*{\ZVi}[1]{\renewcommand*{\@ZVZi}{#1}}
+\newcommand*{\AZFirma}[1]{\renewcommand*{\@AZFirma}{#1}}
+\newcommand*{\AZAnrede}[1]{\renewcommand*{\@AZAnrede}{#1}}
+\newcommand*{\AZName}[1]{\renewcommand*{\@AZName}{#1}}
+\newcommand*{\AZStrasse}[1]{\renewcommand*{\@AZStrasse}{#1}}
+\newcommand*{\AZPLZOrt}[1]{\renewcommand*{\@AZPLZOrt}{#1}}
+\newcommand*{\AZLand}[1]{\renewcommand*{\@AZLand}{#1}}
+\newcommand*{\ABSName}[1]{\renewcommand*{\@ABSName}{#1}}
+\newcommand*{\ABSStrasse}[1]{\renewcommand*{\@ABSStrasse}{#1}}
+\newcommand*{\ABSPLZ}[1]{\renewcommand*{\@ABSPLZ}{#1}}
+\newcommand*{\ABSOrt}[1]{\renewcommand*{\@ABSOrt}{#1}}
+\newcommand*{\ABSPhone}[1]{\renewcommand*{\@ABSPhone}{#1}}
+\newcommand*{\ABSMobile}[1]{\renewcommand*{\@ABSMobile}{#1}}
+\newcommand*{\ABSFax}[1]{\renewcommand*{\@ABSFax}{#1}}
+\newcommand*{\ABSMail}[1]{\renewcommand*{\@ABSMail}{#1}}
+\newcommand*{\ABSWeb}[1]{\renewcommand*{\@ABSWeb}{#1}}
+\newcommand*{\ABSInfo}[1]{\renewcommand*{\@ABSInfo}{#1}}
+\newcommand*{\ABSFunktion}[1]{\renewcommand*{\@ABSFunktion}{#1}}
+\newcommand*{\Bezugszeichenzeile}[1]{\renewcommand*{\@Bezugszeichenzeile}{#1}}
+\newcommand*{\Betreff}[1]{\renewcommand*{\@Betreff}{#1}}
+\newcommand*{\institut}[1]{\renewcommand*{\@institut}{#1}}
+\newcommand*{\logoeinrichtung}[1]{\renewcommand*{\@logoeinrichtung}{#1}}
+\newcommand*{\Briefpapier}[1]{\renewcommand*{\@Briefpapier}{#1}}
+\newcommand*{\Signatur}[1]{\renewcommand*{\@Signatur}{#1}}
+\newcommand{\ABSRaum}[1]{\renewcommand{\@ABSRaum}{#1}}
+\newcommand{\PaketAdresse}[1]{\renewcommand{\PaketAdresse}{#1}}
+\newcommand{\BriefAdresse}[1]{\renewcommand{\BriefAdresse}{#1}}
+\newcommand{\rollstuhlanmerkungenl}[1]{\renewcommand{\@rollstuhlanmerkungen}{#1}}
+%    \end{macrocode}
+% \subsubsection{Typesetting commands}
+% \DescribeMacro{\Anrede}
+% Anrede
+%    \begin{macrocode}
+\newcommand{\Anrede}[1]{%
+    {\flushleft#1,\par}%
+}
+%    \end{macrocode}
+% \DescribeMacro{\Gruss}
+% Grußformel
+%    \begin{macrocode}
+\newcommand{\Gruss}[2][3.5cm]{
+    \par
+    #2\newline
+    \PrintSignatur[#1]{}
+}
+%    \end{macrocode}
+% \DescribeMacro{\maketitle}
+% Die erste Seite setzen. Folgendes passiert hier:
+% \begin{itemize}
+% 	\item Neue ungerade (rechte) Seite beginnen, wenn nötig, wird eine Leerseite eingefügt. Dies ist sinnvoll, um mehrere Briefe in einem Dokument hintereinander zu setzen.
+% 	\item Die Seitenzahl wird auf 1 zurückgesetzt.
+% 	\item Den Seitenanstellungen \verb|brief| für alle Seiten und \verb|briefersteseite| für die aktuelle Seite auswählen.
+% 	\item Kopfbereich setzen.
+% 	\item Anschrift- und Absenderzone nebeneinander setzen.
+% 	\item Bezugszeichenzeile und den Betreff setzen
+% 	\item PDF Metadaten werden eingestellt
+% 	\item Hintergrund (Briefpapier) einstellen
+% \end{itemize}
+% \changes{v0.3}{2022/03/18}{Fixed the new page to start on the right side with empty page, if necessary}
+%    \begin{macrocode}
+\renewcommand{\maketitle}{%
+    \clearpage{\thispagestyle{empty}\cleardoublepage}%
+    \setcounter{page}{1}%
+    \pagestyle{brief}%
+    \thispagestyle{briefersteseite}%
+    \enlargethispage{-3.5cm}
+    \PrintKopfbereich{}%
+    \begin{minipage}[t]{\textwidth}\PrintAnschriftzone\hfill\PrintAbsenderzone\end{minipage}\\%
+    \PrintBezugszeichenzeile{}%
+    {\flushleft\textbf{\@Betreff}\setlength{\parskip}{2\baselineskip}\par}%
+    \hypersetup{%
+        pdfsubject = {\@Betreff},%
+        pdftitle = {\@Betreff},%
+        pdfauthor = {\@ABSName}%
+    }%
+    \PrintBriefPapier{}%
+}
+\endinput
+%</class>
+%    \end{macrocode}
+%\Finale

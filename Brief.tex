@@ -1,0 +1,82 @@
+\documentclass[twoside]{tudbrief2022}
+\usepackage{lipsum}
+\usepackage[ngerman]{babel}		% for hyphenation and date format
+
+% Absenderfeld
+\ABSName{Name des Absenders}
+\ABSStrasse{Absenderstraße 1}
+\ABSPLZ{01234}
+\ABSOrt{Absenderort}
+\ABSPhone{+49~123~123456789}
+\ABSMobile{+49~123~123456789}
+\ABSFax{+49~123~123456789}
+\ABSMail{vorname.nachname@tu-dresden.de}
+\ABSWeb{tu-dresden.de/cd}
+\ABSFunktion{Wissenschaftlicher Mitarbeiter}
+\ABSInfo{Zusätzliche Informationen über den Absender}
+% Adressfeld
+\ZViii{elektronische Freimachungsvermerke}
+\ZVii{Vorausfügung}
+\ZVi{z.\,B.\ Einschreiben}
+\AZFirma{Firma}
+\AZAnrede{Frau/Herr}
+\AZName{Name des Addressaten}
+\AZStrasse{Zielstraße 1}
+\AZPLZOrt{12345 Zielort}
+\AZLand{Deutschland}
+% Betreff
+\Betreff{Betreff}
+% Aussehen
+\institut{Absendende Struktureinheit der TU Dresden}
+\logoeinrichtung{./template/Logo_Einrichtung.pdf}
+
+\Briefpapier{}
+%\Signatur{Unterschrift.png}
+
+\makeatletter
+
+\makeatother
+
+
+\begin{document}
+	\maketitle{}
+	\Anrede{Sehr geehrte Mitglieder und Angehörige der TU Dresden}
+	
+	dies ist die \emph{Vorlage für einen allgemeinen Brief}.
+	Diese Vorlage umfasst eine Reihe von Voreinstellungen, welche dazu beitragen, den Brief schnell und effizient zu formatieren und bei Bedarf als barrierefreies Dokument zu exportieren.
+	Über Links im Text haben wir Ihnen Webseiten oder Dokumente mit nützlichen Anleitungen hinterlegt.
+	\textcolor{red}{Bitte lesen Sie erst beide Seiten, bevor Sie mit der Anpassung der Vorlage beginnen.}
+	
+	\section*{Dokumentenstruktur}
+	Das Dokument ist mittels Bereichen und Absatzumbrüchen (LibreOffice Hilfe Kapitel 4) in verschiedene Abschnitte unterteilt. Sie können Ihr Dokument hinsichtlich vorhandener Umbrüche, Leerzeichen und -zeilen überprüfen, indem Sie die Formatierungszeichen einblenden. Die Anschrift sowie personenbezogenen Kontaktangaben im Briefkopf sind als zweispaltiger Absatz angelegt. Der restliche Text ist einspaltig.
+	
+	Benötigte Felder:
+	\begin{itemize}
+		\item Institut/Einrichtung
+		\item Briefadresse + PLZ
+		\item Besucheradresse + Raum
+		\item Paketadresse TU Dresden, Straße, PLZ, Ort
+	\end{itemize}
+	Optionen
+	\begin{itemize}
+		\item ddc/noddc
+		\item footer/nofooter
+	\end{itemize}
+	\Gruss{mit freundlichem Gruß}
+	
+	% Post Scriptum
+	%PS: Ich bin bis März nur telefonisch erreichbar.
+	
+	% Weitere PDFs können automatisch angefügt werden, z.B. Anhänge.
+	%\includepdf[pages=-,openright]{pfad/zu/weiteren/pdfs/dokument.pdf}
+	% Pfad ist relativ zu dieser tex-Datei. Mit .. ein Verzeichnis hoch.
+	% Der pages-Parameter spezifiziert welche Seiten eingefügt werden.
+	% Beispiele:
+	% pages=-				alle Seiten
+	% pages={1-4}			Seite 1-4
+	% pages={1,4,5}			Seite 1, 4 und 5
+	% pages={3,{},8-11,15}	Seite 3, leere Seite, Seite 8-11 und Seite 15
+	% Der openright-Parameter startet die Anlagen auf ungerader (rechter) Seite, d.h. notfalls wird eine leere Seite
+	% eingefügt. Im doppelseitigem Druck wird dadurch besser zwischen Brief und Anlage getrennt. Für einseitigen Druck
+	% entfernen.
+\end{document}
